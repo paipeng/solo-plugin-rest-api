@@ -22,12 +22,21 @@ include_once '../core/validator.class.php';
 
 include_once APP_ROUTE . 'models/user.php';
 include_once APP_ROUTE . 'models/project.php';
+include_once APP_ROUTE . 'models/client.php';
+include_once APP_ROUTE . 'models/activity.php';
+include_once APP_ROUTE . 'models/message.php';
+include_once APP_ROUTE . 'models/projectnotes.php';
+include_once APP_ROUTE . 'models/timeentry.php';
+
+include_once APP_ROUTE . 'models/file.php';
 include_once APP_ROUTE . 'models/task.php';
 
 
 include_once 'functions.php';
 include_once "HomeApi.php";
 include_once 'ProjectApi.php';
+include_once 'ClientApi.php';
+include_once 'TaskApi.php';
 
 Epi::setPath('base', LIB_PATH);
 
@@ -47,7 +56,8 @@ getRoute()->get('/project/(\d+)', array('ProjectApi', 'getProjectById'), EpiApi:
 getRoute()->get('/version', array('HomeApi', 'getVersion'), EpiApi::external);
 */
 
-getApi()->get('/params.json', 'apiParams', EpiApi::external);
+getApi()->get('/getParams.json', 'apiGetParams', EpiApi::external);
+getApi()->get('/postParams.json', 'apiPostParams', EpiApi::external);
 
 $route_config = getConfig();
 
@@ -70,40 +80,4 @@ function getConfig() {
     return $json;
 }
 
-function home() {
-    echo 'Solo Rest API';
-}
-
-function contactUs() {
-    echo 'Send us an email at <a href="mailto:foo@bar.com">foo@bar.com</a>';
-}
-
-function auth() {
-    $user = getApi()->invoke('/params.json', EpiRoute::httpGet);
-    //echo "username " . $user["username"];
-    $auth = new Auth();
-    if ($auth->login($user["username"], $user["password"])) {
-        return array('result' => '200 OK');
-    } else {
-        return array('result' => "error");
-    }
-}
-
-function getProjects() {
-    $auth = new Auth();
-
-    //$auth->logout();
-    if ($auth->logged_in()) {
-    $project = new Project();
-    $v = $project->get();
-    return $v;
-    } else {
-        echo "error";
-    }
-}
-
-function apiVersion()
-{
-  return array('version' => '1.0');
-}
 ?>

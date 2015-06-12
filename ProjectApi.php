@@ -42,11 +42,34 @@ class ProjectApi
         if (isLoggedIn()) {
             $project = new Project();
             $v = $project->get($project_id);
+            if (isStatusOnSchedule($v)) {
+                return null;
+            }
 
-            $tasks = $project->get_tasks();
-            return $tasks;
+            if ($item == "tasks") {
+                $tasks = $project->get_tasks();
+                return $tasks;
+            } else if ($item == "client") {
+                $client = new Client();
+                return $client->get($v->client_id);
+
+            } else if ($item == "files") {
+                $file = new File();
+                $file->project_id = $v->id;
+                return $file->get();
+
+            } else if ($item == "activities") {
+                $activity = new Activity();
+                $activity->project_id = $v->id;
+                return $activity->get();
+
+            } else if ($item == "note") {
+                $projectNotes = new ProjectNotes();
+                //var_dump($projectNotes->get($v->id));
+                return $projectNotes->get($v->id);
+            }
         } else {
-            echo "error";
+            return null;
         }
     }
             

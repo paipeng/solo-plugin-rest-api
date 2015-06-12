@@ -18,8 +18,7 @@ class HomeApi
     }
 
     static public function login() {
-        $user = getApi()->invoke('/params.json', EpiRoute::httpGet);
-        //var_dump($user);
+        $user = getApi()->invoke('/postParams.json', EpiRoute::httpGet);
         if( isset($user['username']) && isset($user['password'])) {
 
             $auth = new Auth();
@@ -34,5 +33,15 @@ class HomeApi
         $auth = new Auth();
         $auth->logout();
         return array('result' => "200 OK");
+    }
+
+
+    static public function getUser() {
+        $user = isLoggedIn();
+        if ($user) {
+            return $user;
+        } else {
+            return null;
+        }
     }
 }
