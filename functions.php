@@ -26,3 +26,14 @@ function apiPostParams()
 {
     return $_POST;
 }
+
+function showApis() {
+    $route_config = getConfig();
+
+    echo "<table>";
+    echo "<tr><th>Method</th><th>Path</th></tr>";
+    foreach ($route_config->routes as $route) {
+        echo "<tr><td>" . $route->method. "</td><td><a href='.".$route->path."'>" . $route->path . "</a></td></tr>";
+    }
+    echo "</table>";
+}

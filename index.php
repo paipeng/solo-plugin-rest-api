@@ -42,19 +42,9 @@ Epi::setPath('base', LIB_PATH);
 
 Epi::setSetting('exceptions', true);
 Epi::init('route', 'api');
-Epi::setPath('config', dirname(__FILE__));
-//getRoute()->load('routes.ini');
+//Epi::setPath('config', dirname(__FILE__));
 
 getRoute()->get('/', array('HomeApi', 'getHome'), EpiApi::external);
-/*
-getRoute()->get('/contact', 'contactUs');
-getRoute()->get('/login', 'auth', EpiApi::external);
-getRoute()->get('/logout', 'logout', EpiApi::external);
-//getRoute()->get('/projects', 'getProjects', EpiApi::external);
-getRoute()->get('/projects', array('ProjectApi', 'getAllProjects'), EpiApi::external);
-getRoute()->get('/project/(\d+)', array('ProjectApi', 'getProjectById'), EpiApi::external);
-getRoute()->get('/version', array('HomeApi', 'getVersion'), EpiApi::external);
-*/
 
 getApi()->get('/getParams.json', 'apiGetParams', EpiApi::external);
 getApi()->get('/postParams.json', 'apiPostParams', EpiApi::external);

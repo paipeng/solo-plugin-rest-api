@@ -10,7 +10,9 @@ class HomeApi
 {
     static public function getHome()
     {
-        echo 'Solo Rest API';
+        echo '<h1>Solo Rest API</h1>';
+
+        showApis();
     }
 
     static public function getVersion() {
