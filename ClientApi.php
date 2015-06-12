@@ -42,8 +42,8 @@ class ClientApi
         if (isLoggedIn()) {
             if ($item == "projects") {
                 $project = new Project();
-                $v = $project->get("client_id = 1");
-                return $v;
+                $v = $project->get("client_id = " . $client_id);
+                return count($v)>0?$v:null;
             }
         } else {
             return null;
