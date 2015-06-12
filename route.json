@@ -1,0 +1,55 @@
+{
+    "name": "Solo REST API",
+    "version": "1.0.0",
+    "routes": [
+        {
+            "method": "GET",
+            "path": "/",
+            "class": "HomeApi",
+            "function": "getHome",
+           "external": true
+        },
+        {
+            "method": "GET",
+            "path": "/version",
+            "class": "HomeApi",
+            "function": "getVersion",
+           "external": true
+        },
+        {
+            "method": "GET",
+            "path": "/login",
+            "class": "HomeApi",
+            "function": "login",
+           "external": true
+        },
+        {
+            "method": "GET",
+            "path": "/logout",
+            "class": "HomeApi",
+            "function": "logout",
+           "external": true
+        },
+        {
+            "method": "GET",
+            "path": "/projects",
+            "class": "ProjectApi",
+            "function": "getAllProjects",
+           "external": true
+        },
+        {
+            "method": "GET",
+            "path": "/project/(\\d+)",
+            "class": "ProjectApi",
+            "function": "getProjectById",
+            "external": true
+        },
+        {
+            "method": "GET",
+            "path": "/project/(\\d+)/(\\w+)",
+            "class": "ProjectApi",
+            "function": "getItemsByProjectId",
+            "external": true
+        }
+    ]
+}

@@ -34,10 +34,10 @@ Epi::setPath('base', LIB_PATH);
 Epi::setSetting('exceptions', true);
 Epi::init('route', 'api');
 Epi::setPath('config', dirname(__FILE__));
-getRoute()->load('routes.ini');
+//getRoute()->load('routes.ini');
 
-/*
 getRoute()->get('/', array('HomeApi', 'getHome'), EpiApi::external);
+/*
 getRoute()->get('/contact', 'contactUs');
 getRoute()->get('/login', 'auth', EpiApi::external);
 getRoute()->get('/logout', 'logout', EpiApi::external);
@@ -49,16 +49,29 @@ getRoute()->get('/version', array('HomeApi', 'getVersion'), EpiApi::external);
 
 getApi()->get('/params.json', 'apiParams', EpiApi::external);
 
+$route_config = getConfig();
 
+foreach ($route_config->routes as $route) {
+    //var_dump($route);
+    $method = strtolower($route->method);
+    //var_dump(array($route->class, $route->function));
+    getRoute()->$method($route->path,
+        (property_exists($route, 'class')?array($route->class, $route->function):$route->function), 
+        //array($route->class, $route->function), 
+        $route->external);
+
+}
 getRoute()->run();
+
+function getConfig() {
+    $str = file_get_contents('route.json');
+    $json = json_decode($str);
+    //var_dump($json);
+    return $json;
+}
 
 function home() {
     echo 'Solo Rest API';
-}
-
-function apiParams()
-{
-  return $_GET;
 }
 
 function contactUs() {
@@ -74,12 +87,6 @@ function auth() {
     } else {
         return array('result' => "error");
     }
-}
-
-function logout() {
-    $auth = new Auth();
-    $auth->logout();
-    return array('result' => "200 OK");
 }
 
 function getProjects() {

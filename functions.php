@@ -12,5 +12,10 @@ function isLoggedIn() {
 }
 
 function isStatusOnSchedule($result) {
-    return (array_key_exists('status_text', $result) && $result['status_text'] == 'on-schedule');
+    return (array_key_exists('status_text', $result) && $result['status_text'] == 'on-schedule' && !isset($result['id']));
+}
+
+function apiParams()
+{
+  return $_GET;
 }
