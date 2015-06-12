@@ -22,7 +22,7 @@ include_once '../core/validator.class.php';
 
 include_once APP_ROUTE . 'models/user.php';
 include_once APP_ROUTE . 'models/project.php';
-include_once APP_ROUTE . 'models/Task.php';
+include_once APP_ROUTE . 'models/task.php';
 
 
 include_once 'functions.php';
