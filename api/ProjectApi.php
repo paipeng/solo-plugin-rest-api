@@ -27,9 +27,9 @@ class ProjectApi
             if (isStatusOnSchedule($v)) {
                   return null;
             }
-            $tasks = $project->get_tasks();
+            //$tasks = $project->get_tasks();
             //var_dump($tasks);
-            $v->tasks = $tasks;
+            //$v->tasks = $tasks;
 
             return $v;
 
@@ -72,5 +72,12 @@ class ProjectApi
             return null;
         }
     }
-            
+
+    static public function createProject() {
+        if (isLoggedIn()) {
+            $project = new Project();
+            $project->import_parameters_exactly(apiHttpBody());
+            return $project->save();
+        }
+    }
 }

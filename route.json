@@ -59,6 +59,13 @@
       "external": true
     },
     {
+      "method": "POST",
+      "path": "/project",
+      "class": "ProjectApi",
+      "function": "createProject",
+      "external": true
+    },
+    {
       "method": "GET",
       "path": "/clients",
       "class": "ClientApi",
@@ -80,6 +87,13 @@
       "external": true
     },
     {
+      "method": "POST",
+      "path": "/client",
+      "class": "ClientApi",
+      "function": "createClient",
+      "external": true
+    },
+    {
       "method": "GET",
       "path": "/tasks",
       "class": "TaskApi",
@@ -88,9 +102,23 @@
     },
     {
       "method": "GET",
+      "path": "/task/(\\d+)",
+      "class": "TaskApi",
+      "function": "getTaskById",
+      "external": true
+    },
+    {
+      "method": "GET",
       "path": "/task/(\\d+)/(\\w+)",
       "class": "TaskApi",
       "function": "getTimeEntriesByTaskId",
+      "external": true
+    },
+    {
+      "method": "POST",
+      "path": "/task",
+      "class": "TaskApi",
+      "function": "createTask",
       "external": true
     }
 

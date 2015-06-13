@@ -36,4 +36,21 @@ class TaskApi
             return null;
         }
     }
+
+    static public function getTaskById($task_id) {
+        if (isLoggedIn()) {
+            $task = new Task();
+            return $task->get_one($task_id);
+        } else {
+            return null;
+        }
+    }
+
+    static public function createTask() {
+        if (isLoggedIn()) {
+            $task = new Task();
+            $task->import_parameters_exactly(apiHttpBody());
+            return $task->save();
+        }
+    }
 }

@@ -8,7 +8,6 @@
  */
 
 
-
 class ClientApi
 {
     static public function getClients()
@@ -47,6 +46,15 @@ class ClientApi
             }
         } else {
             return null;
+        }
+    }
+
+    static public function createClient() {
+        if (isLoggedIn()) {
+            $client = new SoloClient();
+            $client->import_parameters_exactly(apiHttpBody());
+            //$client->id = 0;
+            return $client->save();
         }
     }
 }

@@ -27,6 +27,12 @@ function apiPostParams()
     return $_POST;
 }
 
+function apiHttpBody() {
+    $entityBody = file_get_contents('php://input');
+    //var_dump($entityBody);
+    return (array)json_decode($entityBody);
+}
+
 function showApis() {
     $route_config = getConfig();
 
@@ -36,4 +42,10 @@ function showApis() {
         echo "<tr><td>" . $route->method. "</td><td><a href='.".$route->path."'>" . $route->path . "</a></td></tr>";
     }
     echo "</table>";
+}
+
+function setTimezone() {
+    //$systemTimeZone = system('date +%Z');
+
+    date_default_timezone_set('UTC');
 }

@@ -1,5 +1,7 @@
 <?php
 
+
+
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__).'/../');
 define('APP_ROUTE', ROOT . 'application/');
@@ -20,6 +22,9 @@ include_once '../core/model.class.php';
 include_once '../core/language.class.php';
 include_once '../core/validator.class.php';
 
+include_once '../core/database/db.helpers.class.php';
+
+
 include_once APP_ROUTE . 'models/user.php';
 include_once APP_ROUTE . 'models/project.php';
 include_once APP_ROUTE . 'models/client.php';
@@ -27,16 +32,21 @@ include_once APP_ROUTE . 'models/activity.php';
 include_once APP_ROUTE . 'models/message.php';
 include_once APP_ROUTE . 'models/projectnotes.php';
 include_once APP_ROUTE . 'models/timeentry.php';
+include_once APP_ROUTE . 'models/activitymanager.php';
 
 include_once APP_ROUTE . 'models/file.php';
 include_once APP_ROUTE . 'models/task.php';
 
 
+include_once 'SoloModels/SoloClient.php';
+
 include_once 'functions.php';
-include_once "HomeApi.php";
-include_once 'ProjectApi.php';
-include_once 'ClientApi.php';
-include_once 'TaskApi.php';
+include_once "api/HomeApi.php";
+include_once 'api/ProjectApi.php';
+include_once 'api/ClientApi.php';
+include_once 'api/TaskApi.php';
+
+setTimezone();
 
 Epi::setPath('base', LIB_PATH);
 
@@ -48,6 +58,9 @@ getRoute()->get('/', array('HomeApi', 'getHome'), EpiApi::external);
 
 getApi()->get('/getParams.json', 'apiGetParams', EpiApi::external);
 getApi()->get('/postParams.json', 'apiPostParams', EpiApi::external);
+getApi()->get('/httpBody.json', 'apiHttpBody', EpiApi::external);
+
+
 
 $route_config = getConfig();
 
