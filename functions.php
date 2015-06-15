@@ -6,12 +6,19 @@
  * Time: 00:32
  */
 
-function initRoute($route) {
+function initApi($api) {
+    $api->get('/getParams.json', 'apiGetParams', EpiApi::external);
+    $api->get('/postParams.json', 'apiPostParams', EpiApi::external);
+    $api->get('/httpBody.json', 'apiHttpBody', EpiApi::external);
+}
+
+function initRoute($route)
+{
     $route->get('/', array('HomeApi', 'getHome'), EpiApi::external);
 
-getApi()->get('/getParams.json', 'apiGetParams', EpiApi::external);
-getApi()->get('/postParams.json', 'apiPostParams', EpiApi::external);
-getApi()->get('/httpBody.json', 'apiHttpBody', EpiApi::external);
+    getApi()->get('/getParams.json', 'apiGetParams', EpiApi::external);
+    getApi()->get('/postParams.json', 'apiPostParams', EpiApi::external);
+    getApi()->get('/httpBody.json', 'apiHttpBody', EpiApi::external);
 
     $route_config = getConfig();
 
@@ -20,14 +27,15 @@ getApi()->get('/httpBody.json', 'apiHttpBody', EpiApi::external);
         foreach ($routes as $api_route) {
             $method = strtolower($api_route->method);
             $route->$method($api_route->path,
-                (property_exists($api_route, 'class')?array($api_route->class, $api_route->function):$api_route->function),
+                (property_exists($api_route, 'class') ? array($api_route->class, $api_route->function) : $api_route->function),
                 $api_route->external);
         }
     }
     $route->run();
 }
 
-function getConfig() {
+function getConfig()
+{
     $str = file_get_contents('route.json');
     $json = json_decode($str);
     //var_dump($json);
@@ -55,27 +63,30 @@ function apiPostParams()
     return $_POST;
 }
 
-function apiHttpBody() {
+function apiHttpBody()
+{
     $entityBody = file_get_contents('php://input');
     //var_dump($entityBody);
     return (array)json_decode($entityBody);
 }
 
-function showApis() {
+function showApis()
+{
     $route_config = getConfig();
 
     echo "<table>";
     echo "<tr><th>Method</th><th>Path</th></tr>";
     foreach ($route_config->routes as $apiname) {
-        echo "<tr><td><h1>". $apiname->api. "</h1></td></tr>";
+        echo "<tr><td><h1>" . $apiname->api . "</h1></td></tr>";
         foreach ($apiname->route as $route) {
-        echo "<tr><td>" . $route->method. "</td><td><a href='.".$route->path."'>" . $route->path . "</a></td></tr>";
+            echo "<tr><td>" . $route->method . "</td><td><a href='." . $route->path . "'>" . $route->path . "</a></td></tr>";
         }
     }
     echo "</table>";
 }
 
-function setTimezone() {
+function setTimezone()
+{
     //$systemTimeZone = system('date +%Z');
 
     date_default_timezone_set('UTC');

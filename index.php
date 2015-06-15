@@ -50,39 +50,8 @@ Epi::setPath('base', LIB_PATH);
 
 Epi::setSetting('exceptions', true);
 Epi::init('route', 'api');
-//Epi::setPath('config', dirname(__FILE__));
 
-//getRoute()->get('/', array('HomeApi', 'getHome'), EpiApi::external);
-
-getApi()->get('/getParams.json', 'apiGetParams', EpiApi::external);
-getApi()->get('/postParams.json', 'apiPostParams', EpiApi::external);
-getApi()->get('/httpBody.json', 'apiHttpBody', EpiApi::external);
-
+initApi(getApi());
 initRoute(getRoute());
-/*
-$route_config = getConfig();
 
-foreach ($route_config->routes as $apiname) {
-    var_dump($apiname->api);
-    //var_dump($route);
-    $routes = $apiname->route;
-    foreach ($routes as $route) {
-
-    $method = strtolower($route->method);
-    //var_dump(array($route->class, $route->function));
-    getRoute()->$method($route->path,
-        (property_exists($route, 'class')?array($route->class, $route->function):$route->function), 
-        //array($route->class, $route->function), 
-        $route->external);
-    }
-}
-getRoute()->run();
-
-function getConfig() {
-    $str = file_get_contents('route.json');
-    $json = json_decode($str);
-    //var_dump($json);
-    return $json;
-}
-*/
 ?>
