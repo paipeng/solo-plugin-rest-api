@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "routes": [
     {
+        "api": "home",
+        "route" :[ 
+
+    {
       "method": "GET",
       "path": "/",
       "class": "HomeApi",
@@ -36,7 +40,10 @@
       "class": "HomeApi",
       "function": "logout",
       "external": true
-    },
+    }]},
+    {
+        "api": "project",
+        "route": [
     {
       "method": "GET",
       "path": "/projects",
@@ -64,7 +71,10 @@
       "class": "ProjectApi",
       "function": "createProject",
       "external": true
-    },
+    }]},
+    {
+        "api": "client",
+        "route": [
     {
       "method": "GET",
       "path": "/clients",
@@ -92,7 +102,10 @@
       "class": "ClientApi",
       "function": "createClient",
       "external": true
-    },
+    }]},
+    {
+        "api": "task",
+        "route": [
     {
       "method": "GET",
       "path": "/tasks",
@@ -120,6 +133,8 @@
       "class": "TaskApi",
       "function": "createTask",
       "external": true
+    }
+    ]
     }
 
   ]
