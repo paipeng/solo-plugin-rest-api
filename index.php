@@ -43,6 +43,8 @@ include_once "api/HomeApi.php";
 include_once 'api/ProjectApi.php';
 include_once 'api/ClientApi.php';
 include_once 'api/TaskApi.php';
+include_once 'api/ActivityApi.php';
+include_once 'api/TimeEntryApi.php';
 
 setTimezone();
 

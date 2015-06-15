@@ -140,6 +140,44 @@
           "external": true
         }
       ]
+    },
+    {
+      "api": "activity",
+      "route": [
+        {
+          "method": "GET",
+          "path": "/activities",
+          "class": "ActivityApi",
+          "function": "getActivities",
+          "external": true
+        },
+        {
+          "method": "GET",
+          "path": "/activity/(\\d+)",
+          "class": "ActivityApi",
+          "function": "getActivityById",
+          "external": true
+        }
+      ]
+    },
+    {
+      "api": "timeentry",
+      "route": [
+        {
+          "method": "GET",
+          "path": "/timeentries",
+          "class": "TimeEntryApi",
+          "function": "getTimeEntries",
+          "external": true
+        },
+        {
+          "method": "GET",
+          "path": "/timeentry/(\\d+)",
+          "class": "TimeEntryApi",
+          "function": "getTimeEntryById",
+          "external": true
+        }
+      ]
     }
   ]
 }
